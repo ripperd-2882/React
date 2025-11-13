@@ -58,7 +58,6 @@ function App() {
 }
 
 function Header() {
-  // const style = { color: "red", fontSize: "48px", textTarnsform: "uppercase" };
   const style = {};
 
   return (
@@ -70,16 +69,19 @@ function Header() {
 
 function Menu() {
   const pizzas = pizzaData;
+  // const pizzas = [];
   const numPizza = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      {numPizza > 0 && (
+      {numPizza > 0 ? (
         <ul className="pizzas">
           {pizzaData.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+      ) : (
+        <p>We're currently working on our menu, please come back later</p>
       )}
     </main>
   );
@@ -104,11 +106,15 @@ function Footer() {
   console.log(isOpen);
   return (
     <footer className="footer">
-      {isOpen && (
+      {isOpen ? (
         <div className="order">
           <p>We're open until {closeHour}::00. Come visit us or order online</p>
           <button className="btn">Order</button>
         </div>
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
       )}
     </footer>
   );
