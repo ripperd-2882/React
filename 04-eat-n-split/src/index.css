@@ -118,9 +118,10 @@ form {
 }
 
 .form-add-friend {
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: max-content 1fr;
   margin-bottom: 1.6rem;
   padding: 1.2rem;
+  width: 100%;
 }
 .form-split-bill {
   grid-template-columns: 1fr 12rem;
@@ -131,11 +132,11 @@ label {
   font-weight: 500;
 }
 
-label::first-letter {
+/* label::first-letter {
   display: inline-block;
   margin-right: 4px;
   font-size: 1.8rem;
-}
+} */
 
 input,
 select {
