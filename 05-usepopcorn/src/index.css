@@ -46,12 +46,20 @@ body {
   height: calc(100vh - 7.2rem - 3 * 2.4rem);
   display: flex;
   gap: 2.4rem;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: space-between; /* or use 'stretch' / default */
+  align-items: stretch; /* ensure boxes stretch vertically if needed */
 }
 
 .box {
-  width: 42rem;
-  max-width: 42rem;
+  /* width: 42rem;
+  max-width: 42rem; */
+  width: auto;
+  max-width: none;
+
+  /* make boxes flexible */
+  flex: 1 1 0; /* grow, shrink, base 0 so both share space equally */
+  min-width: 20rem; /* optional: avoid becoming too small on narrow screens */
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
   overflow: hidden;
