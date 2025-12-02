@@ -52,42 +52,47 @@ const average = (arr) =>
 
 export default function App() {
   const [movies, setMovies] = useState([]);
+  const [query, setQuery] = useState("");
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const query = "interstellar";
+  const tempQuery = "interstellar";
 
-  useEffect(function () {
-    setIsLoading(true);
-    async function fetchMovies() {
-      try {
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_KEY}&s=${query}`
-        );
+  useEffect(
+    function () {
+      setIsLoading(true);
+      setError("");
 
-        if (!res.ok)
-          throw new Error("Something went wrong with fetching movies");
+      async function fetchMovies() {
+        try {
+          const res = await fetch(
+            `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_KEY}&s=${query}`
+          );
 
-        const data = await res.json();
-        if (data.Response === "False") throw new Error("Cannot find the Movie");
-        console.log(data);
+          if (!res.ok)
+            throw new Error("Something went wrong with fetching movies");
 
-        setMovies(data.Search);
-      } catch (e) {
-        console.log(e.message);
-        setError(e.message);
-      } finally {
-        setIsLoading(false);
+          const data = await res.json();
+          if (data.Response === "False")
+            throw new Error("Cannot find the Movie");
+
+          setMovies(data.Search);
+        } catch (e) {
+          setError(e.message);
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
-    fetchMovies();
-  }, []);
+      fetchMovies();
+    },
+    [query]
+  );
 
   return (
     <>
       <Navbar>
         <Logo />
-        <SearchBar />
+        <SearchBar query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </Navbar>
 
@@ -133,8 +138,7 @@ function Logo() {
   );
 }
 
-function SearchBar() {
-  const [query, setQuery] = useState("");
+function SearchBar({ query, setQuery }) {
   return (
     <input
       className="search"
