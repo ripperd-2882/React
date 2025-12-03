@@ -56,7 +56,6 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const tempQuery = "interstellar";
 
   useEffect(
     function () {
@@ -148,13 +147,25 @@ function Logo() {
 
 function SearchBar({ query, setQuery }) {
   return (
-    <input
-      className="search"
-      type="text"
-      placeholder="Search movies..."
-      value={query}
-      onChange={(e) => setQuery(e.target.value)}
-    />
+    <div className="search-wrapper">
+      <input
+        className="search"
+        type="text"
+        placeholder="Search movies..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
+      {query && (
+        <button
+          className="btn-clear"
+          onClick={() => setQuery("")}
+          aria-label="Clear search"
+        >
+          ×
+        </button>
+      )}
+    </div>
   );
 }
 
