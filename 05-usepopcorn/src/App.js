@@ -314,6 +314,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
       return function () {
         document.title = "usePopcorn";
+        console.log(`cleanup function for ${title}`);
       };
     },
     [title]
