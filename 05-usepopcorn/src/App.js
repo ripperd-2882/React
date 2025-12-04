@@ -53,7 +53,7 @@ const average = (arr) =>
 
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -77,13 +77,16 @@ export default function App() {
 
   useEffect(
     function () {
-      setIsLoading(true);
-      setError("");
+      const controller = new AbortController();
 
       async function fetchMovies() {
         try {
+          setIsLoading(true);
+          setError("");
+
           const res = await fetch(
-            `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_KEY}&s=${query}`
+            `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_KEY}&s=${query}`,
+            { signal: controller.signal }
           );
 
           if (!res.ok)
@@ -94,8 +97,12 @@ export default function App() {
             throw new Error("Cannot find the Movie");
 
           setMovies(data.Search);
+          setError("");
         } catch (e) {
-          setError(e.message);
+          if (e.name !== "AbortError") {
+            setError(e.message);
+            console.error(e.message);
+          }
         } finally {
           setIsLoading(false);
         }
@@ -109,6 +116,10 @@ export default function App() {
       }
 
       fetchMovies();
+
+      return function () {
+        controller.abort();
+      };
     },
     [query]
   );
