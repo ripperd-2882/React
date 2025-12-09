@@ -9,6 +9,8 @@ export function SearchBar({ query, setQuery }) {
   const inputEl = useRef(null);
 
   useEffect(function () {
+    if (document.activeElement === inputEl.current) return;
+
     function callback(e) {
       if (e.code === "Enter") {
         inputEl.current.focus();
