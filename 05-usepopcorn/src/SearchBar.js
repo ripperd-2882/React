@@ -1,9 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export function SearchBar({ query, setQuery }) {
+  // useEffect(function () {
+  //   const el = document.querySelector(".search");
+  //   el.focus();
+  // }, []);
+
+  const inputEl = useRef(null);
+
   useEffect(function () {
-    const el = document.querySelector(".search");
-    el.focus();
+    inputEl.current.focus();
   }, []);
 
   return (
@@ -14,6 +20,7 @@ export function SearchBar({ query, setQuery }) {
         placeholder="Search movies..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        ref={inputEl}
       />
 
       {query && (
