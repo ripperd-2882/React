@@ -50,7 +50,7 @@ export function MovieDetails({
       function callback(e) {
         if (e.code === "Escape") {
           onCloseMovie();
-          console.log("Closing");
+          console.log("Closing...");
         }
       }
       document.addEventListener("keydown", callback);
