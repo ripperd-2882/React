@@ -8,19 +8,22 @@ export function SearchBar({ query, setQuery }) {
 
   const inputEl = useRef(null);
 
-  useEffect(function () {
-    if (document.activeElement === inputEl.current) return;
+  useEffect(
+    function () {
+      if (document.activeElement === inputEl.current) return;
 
-    function callback(e) {
-      if (e.code === "Enter") {
-        inputEl.current.focus();
-        setQuery("");
+      function callback(e) {
+        if (e.code === "Enter") {
+          inputEl.current.focus();
+          setQuery("");
+        }
       }
-    }
 
-    document.addEventListener("keydown", callback);
-    return () => document.addEventListener("keydown", callback);
-  }, []);
+      document.addEventListener("keydown", callback);
+      return () => document.addEventListener("keydown", callback);
+    },
+    [setQuery]
+  );
 
   return (
     <div className="search-wrapper">
