@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+
 export function SearchBar({ query, setQuery }) {
+  useEffect(function () {
+    const el = document.querySelector(".search");
+    el.focus();
+  }, []);
+
   return (
     <div className="search-wrapper">
       <input
