@@ -40,12 +40,12 @@ function DateCounter() {
   date.setDate(date.getDate() + count);
 
   const dec = function () {
-    dispatch({ type: "dec", payload: -1 });
+    dispatch({ type: "dec" });
     //setCount((count) => count - step);
   };
 
   const inc = function () {
-    dispatch({ type: "inc", payload: 1 });
+    dispatch({ type: "inc" });
     //setCount((count) => count + step);
   };
 
