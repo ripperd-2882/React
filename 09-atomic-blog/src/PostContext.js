@@ -53,6 +53,8 @@ function PostProvider({ children }) {
 // CREATING A CUSTOM HOOK
 function usePosts() {
   const context = useContext(PostContext);
+  if (context === undefined)
+    throw new Error("PostContext was used outside PostProvider");
   return context;
 }
 
