@@ -4,6 +4,15 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useState } from "react";
 import { useCities } from "../contexts/CitiesContext";
 
+const flagEmojiToPNG = (flag) => {
+  var countryCode = Array.from(flag, (codeUnit) => codeUnit.codePointAt())
+    .map((char) => String.fromCharCode(char - 127397).toLowerCase())
+    .join("");
+  return (
+    <img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt="flag" />
+  );
+};
+
 function Map() {
   const navigate = useNavigate();
   const { cities } = useCities();
@@ -32,7 +41,8 @@ function Map() {
             key={city.id}
           >
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              <span>{flagEmojiToPNG(city.emoji)}</span>
+              <span>{city.cityName}</span>
             </Popup>
           </Marker>
         ))}
