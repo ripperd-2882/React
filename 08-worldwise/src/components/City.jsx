@@ -13,12 +13,14 @@ const formatDate = (date) =>
     weekday: "long",
   }).format(new Date(date));
 
-const flagEmojiToPNG = (flag) => {
-  var countryCode = Array.from(flag, (codeUnit) => codeUnit.codePointAt())
-    .map((char) => String.fromCharCode(char - 127397).toLowerCase())
-    .join("");
+const flagCodeToPNG = (countryCode) => {
+  if (!countryCode) return null;
+
   return (
-    <img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt="flag" />
+    <img
+      src={`https://flagcdn.com/24x18/${countryCode.toLowerCase()}.png`}
+      alt="flag"
+    />
   );
 };
 
@@ -42,7 +44,7 @@ function City() {
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
-          <span>{emoji && flagEmojiToPNG(emoji)}</span> {cityName}
+          <span>{emoji && flagCodeToPNG(emoji)}</span> {cityName}
         </h3>
       </div>
 
