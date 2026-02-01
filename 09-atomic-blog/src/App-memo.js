@@ -42,6 +42,7 @@ function App() {
   );
 
   const archiveOptions = {
+    //This object is recreated over and over again everytime app is re-rendered
     show: false,
     title: "Post archieve in addition to main posts",
   };
