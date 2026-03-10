@@ -1,5 +1,5 @@
 function App() {
-  const x = 12;
+  // const x = 12;
 
   return <div>Hello Vite</div>;
 }
