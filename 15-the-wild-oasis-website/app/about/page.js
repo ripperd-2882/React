@@ -39,11 +39,18 @@ export default function Page() {
         <Image
           src={image1}
           alt="Family sitting around a fire pit in front of cabin"
+          placeholder="blur"
+          quality={80}
         />
       </div>
 
-      <div className="col-span-2">
-        <Image src={image2} alt="Family that manages The Wild Oasis" />
+      <div className="relative aspect-square col-span-2">
+        <Image
+          src="/about-2.jpg"
+          fill
+          className="object-cover"
+          alt="Family that manages The Wild Oasis"
+        />
       </div>
 
       <div className="col-span-3">
