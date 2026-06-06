@@ -1,15 +1,16 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
+import Filter from "../_components/Filter";
 
-export const revalidate = 3600; //Fresh data available once in an hour
+export const revalidate = 3600; //Fresh data available once in an hour-but will not work as the page is not longer static because of searchParams
 
 export const metadata = {
   title: "Cabins",
 };
 
-export default async function Page() {
-  // CHANGE
+export default async function Page({ searchParams }) {
+  const filter = searchParams?.capacity ?? "all";
 
   return (
     <div>
@@ -25,8 +26,12 @@ export default async function Page() {
         Welcome to paradise.
       </p>
 
+      <div className="flex justify-end mb-8">
+        <Filter />
+      </div>
+
       <Suspense fallback={<Spinner />}>
-        <CabinList />
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );
