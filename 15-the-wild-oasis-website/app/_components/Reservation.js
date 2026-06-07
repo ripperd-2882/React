@@ -9,8 +9,12 @@ async function Reservation({ cabin }) {
   ]); //Takes am much time as the slowest component
   return (
     <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
-      <DateSelector />
-      <ReservationForm />
+      <DateSelector
+        settings={settings}
+        bookedDates={bookedDates}
+        caabin={cabin}
+      />
+      <ReservationForm cabin={cabin}/>
     </div>
   );
 }
