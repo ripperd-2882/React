@@ -28,7 +28,11 @@ export async function updateGuest(formData) {
   revalidatePath("/account/profile");
 }
 
-export async function deleteReservation(bookingId) {
+export async function createBooking(formData) {
+  console.log(formData);
+}
+
+export async function deleteBooking(bookingId) {
   await new Promise((res) => setTimeout(res, 2000));
 
   const session = await auth();
@@ -50,7 +54,7 @@ export async function deleteReservation(bookingId) {
   revalidatePath("/account/reservations");
 }
 
-export async function updateBooking(formData) {
+export async function updateBooking(bookingData, formData) {
   const bookingId = Number(formData.get("bookingId"));
 
   // 1) Authentication
